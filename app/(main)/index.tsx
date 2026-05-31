@@ -80,7 +80,7 @@ export default function TodayScreen() {
           <RefreshControl
             refreshing={isRefetching}
             onRefresh={refetch}
-            tintColor={colors.brand}
+            tintColor={colors.accent}
           />
         }
         showsVerticalScrollIndicator={false}
@@ -105,7 +105,7 @@ export default function TodayScreen() {
             <Typography
               variant="h1"
               weight="extraBold"
-              style={{ color: colors.text, marginBottom: 28, lineHeight: 40 }}
+              style={{ color: colors.text, marginBottom: 28 }}
             >
               {survey.question}
             </Typography>
@@ -172,11 +172,22 @@ function LoadingState({ colors }: { colors: ColorScheme }) {
 function EmptyState({ colors }: { colors: ColorScheme }) {
   return (
     <View style={{ alignItems: 'center', paddingTop: 60, gap: 12 }}>
-      <Typography style={{ fontSize: 48 }}>📭</Typography>
+      <View
+        style={{
+          width: 72,
+          height: 72,
+          borderRadius: 36,
+          backgroundColor: colors.surfaceAlt,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Ionicons name="mail-unread-outline" size={32} color={colors.textMuted} />
+      </View>
       <Typography variant="h3" weight="bold" center>
         Bugün anket yok
       </Typography>
-      <Typography variant="body" muted center style={{ maxWidth: 260, lineHeight: 22 }}>
+      <Typography variant="body" muted center style={{ maxWidth: 260 }}>
         Yarın yeni bir anket yayınlanacak. Bildirimleri açık tutmayı unutmayın.
       </Typography>
     </View>

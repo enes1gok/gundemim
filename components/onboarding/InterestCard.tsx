@@ -16,19 +16,20 @@ interface InterestCardProps {
 export function InterestCard({ category, selected, onToggle }: InterestCardProps) {
   const scheme = useColorScheme();
   const colors = scheme === 'dark' ? darkColors : lightColors;
+  const accentTextColor = scheme === 'dark' ? '#000000' : '#FFFFFF';
 
   return (
     <TouchableOpacity activeOpacity={0.8} onPress={onToggle} style={{ flex: 1 }}>
       <MotiView
         animate={{
-          scale: selected ? 1.03 : 1,
-          borderColor: selected ? category.color : colors.border,
-          backgroundColor: selected ? category.color + '15' : colors.surface,
+          scale: selected ? 1.02 : 1,
+          borderColor: selected ? colors.accent : colors.border,
+          backgroundColor: selected ? colors.accent : colors.surface,
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         style={{
           borderRadius: radius.xl,
-          borderWidth: 1.5,
+          borderWidth: 1,
           padding: 20,
           alignItems: 'center',
           gap: 10,
@@ -41,7 +42,7 @@ export function InterestCard({ category, selected, onToggle }: InterestCardProps
             width: 44,
             height: 44,
             borderRadius: 22,
-            backgroundColor: category.color + '22',
+            backgroundColor: selected ? accentTextColor + '22' : colors.surfaceAlt,
             alignItems: 'center',
             justifyContent: 'center',
           }}
@@ -49,14 +50,14 @@ export function InterestCard({ category, selected, onToggle }: InterestCardProps
           <Ionicons
             name={category.icon as any}
             size={22}
-            color={selected ? category.color : colors.textMuted}
+            color={selected ? accentTextColor : colors.textMuted}
           />
         </View>
         <Typography
           variant="body"
           weight={selected ? 'bold' : 'semiBold'}
           center
-          style={{ color: selected ? category.color : colors.text }}
+          style={{ color: selected ? accentTextColor : colors.text }}
         >
           {category.label}
         </Typography>

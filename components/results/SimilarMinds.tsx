@@ -21,13 +21,13 @@ export function SimilarMinds({ text, delay = 0 }: SimilarMindsProps) {
       animate={{ opacity: 1, translateY: 0 }}
       transition={{ type: 'spring', stiffness: 200, damping: 20, delay }}
       style={{
-        backgroundColor: colors.brandDim,
+        backgroundColor: colors.surfaceAlt,
         borderRadius: radius.lg,
         padding: 16,
         flexDirection: 'row',
         gap: 12,
         borderWidth: 1,
-        borderColor: colors.brand + '33',
+        borderColor: colors.border,
       }}
     >
       <View
@@ -35,15 +35,19 @@ export function SimilarMinds({ text, delay = 0 }: SimilarMindsProps) {
           width: 36,
           height: 36,
           borderRadius: 18,
-          backgroundColor: colors.brand + '22',
+          backgroundColor: colors.surfaceElevated,
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-        <Ionicons name="people" size={18} color={colors.brand} />
+        <Ionicons name="people" size={18} color={colors.text} />
       </View>
       <View style={{ flex: 1 }}>
-        <Typography variant="caption" weight="bold" style={{ color: colors.brand, marginBottom: 3 }}>
+        <Typography
+          variant="caption"
+          weight="bold"
+          style={{ color: colors.text, marginBottom: 3 }}
+        >
           Sizinle Benzer Görüş
         </Typography>
         <Typography variant="body" style={{ color: colors.text }}>

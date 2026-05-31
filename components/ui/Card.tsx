@@ -5,21 +5,25 @@ import { radius } from '../../theme/spacing';
 
 interface CardProps extends ViewProps {
   elevated?: boolean;
+  flat?: boolean;
   noPadding?: boolean;
 }
 
-export function Card({ elevated, noPadding, style, ...props }: CardProps) {
+export function Card({ elevated, flat, noPadding, style, ...props }: CardProps) {
   const scheme = useColorScheme();
   const colors = scheme === 'dark' ? darkColors : lightColors;
+
+  const bg = elevated ? colors.surfaceAlt : colors.surface;
+  const showBorder = !elevated && !flat;
 
   return (
     <View
       style={[
         {
-          backgroundColor: elevated ? colors.surfaceAlt : colors.surface,
+          backgroundColor: bg,
           borderRadius: radius.lg,
-          padding: noPadding ? 0 : 16,
-          borderWidth: 1,
+          padding: noPadding ? 0 : 20,
+          borderWidth: showBorder ? 1 : 0,
           borderColor: colors.border,
         },
         style,

@@ -1,5 +1,5 @@
 import React, { useMemo, useRef } from 'react';
-import { View, TouchableOpacity, FlatList, useColorScheme } from 'react-native';
+import { View, TouchableOpacity, useColorScheme } from 'react-native';
 import BottomSheet, { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { Ionicons } from '@expo/vector-icons';
 import { Typography } from '../ui/Typography';
@@ -21,7 +21,6 @@ export function RegionPicker({ selected, onSelect, isOpen, onClose }: RegionPick
 
   const selectedProvince = PROVINCES.find((p) => p.code === selected);
 
-  // Grouped by region
   const grouped = useMemo(() => {
     return GEOGRAPHIC_REGIONS.map((region) => ({
       region,
@@ -30,7 +29,9 @@ export function RegionPicker({ selected, onSelect, isOpen, onClose }: RegionPick
   }, []);
 
   const flatData = useMemo(() => {
-    const items: Array<{ type: 'header'; label: string } | { type: 'item'; code: string; name: string }> = [];
+    const items: Array<
+      { type: 'header'; label: string } | { type: 'item'; code: string; name: string }
+    > = [];
     grouped.forEach(({ region, provinces }) => {
       items.push({ type: 'header', label: region });
       provinces.forEach((p) => items.push({ type: 'item', code: p.code, name: p.name }));
@@ -50,14 +51,14 @@ export function RegionPicker({ selected, onSelect, isOpen, onClose }: RegionPick
           paddingVertical: 14,
           paddingHorizontal: 16,
           borderRadius: radius.md,
-          borderWidth: 1.5,
-          borderColor: selected ? colors.brand : colors.border,
-          backgroundColor: selected ? colors.brandDim : colors.surface,
+          borderWidth: 1,
+          borderColor: selected ? colors.accent : colors.border,
+          backgroundColor: selected ? colors.surfaceAlt : colors.surface,
         }}
       >
         <Typography
           variant="body"
-          style={{ color: selected ? colors.brand : colors.textMuted }}
+          style={{ color: selected ? colors.text : colors.textMuted }}
           weight={selected ? 'semiBold' : 'regular'}
         >
           {selectedProvince?.name ?? 'İlinizi seçin'}
@@ -65,7 +66,7 @@ export function RegionPicker({ selected, onSelect, isOpen, onClose }: RegionPick
         <Ionicons
           name="chevron-down"
           size={18}
-          color={selected ? colors.brand : colors.textMuted}
+          color={selected ? colors.textMuted : colors.textFaint}
         />
       </TouchableOpacity>
 
@@ -86,26 +87,32 @@ export function RegionPicker({ selected, onSelect, isOpen, onClose }: RegionPick
         <BottomSheetFlatList
           data={flatData}
           keyExtractor={(item, index) =>
-            item.type === 'header' ? `h-${item.label}` : `i-${item.code}`
+            item.type === 'header' ? `h-${item.label}` : `i-${(item as any).code}`
           }
           renderItem={({ item }) => {
             if (item.type === 'header') {
               return (
-                <View
-                  style={{ paddingHorizontal: 20, paddingTop: 16, paddingBottom: 6 }}
-                >
-                  <Typography variant="caption" weight="bold" muted>
-                    {item.label.toUpperCase()}
+                <View style={{ paddingHorizontal: 20, paddingTop: 16, paddingBottom: 6 }}>
+                  <Typography
+                    variant="tiny"
+                    weight="semiBold"
+                    style={{
+                      color: colors.textFaint,
+                      letterSpacing: 1.2,
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    {item.label}
                   </Typography>
                 </View>
               );
             }
-            const isSelected = item.code === selected;
+            const isSelected = (item as any).code === selected;
             return (
               <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => {
-                  onSelect(item.code);
+                  onSelect((item as any).code);
                   sheetRef.current?.close();
                 }}
                 style={{
@@ -114,18 +121,18 @@ export function RegionPicker({ selected, onSelect, isOpen, onClose }: RegionPick
                   justifyContent: 'space-between',
                   paddingHorizontal: 20,
                   paddingVertical: 13,
-                  backgroundColor: isSelected ? colors.brandDim : 'transparent',
+                  backgroundColor: isSelected ? colors.surfaceAlt : 'transparent',
                 }}
               >
                 <Typography
                   variant="body"
                   weight={isSelected ? 'semiBold' : 'regular'}
-                  style={{ color: isSelected ? colors.brand : colors.text }}
+                  style={{ color: isSelected ? colors.text : colors.text }}
                 >
-                  {item.name}
+                  {(item as any).name}
                 </Typography>
                 {isSelected && (
-                  <Ionicons name="checkmark" size={18} color={colors.brand} />
+                  <Ionicons name="checkmark" size={18} color={colors.accent} />
                 )}
               </TouchableOpacity>
             );

@@ -182,13 +182,13 @@ export default function CreateSurveyScreen() {
                     style={{
                       width: 24,
                       height: 24,
-                      borderRadius: 12,
-                      backgroundColor: colors.brandDim,
+                      borderRadius: 6,
+                      backgroundColor: colors.surfaceAlt,
                       alignItems: 'center',
                       justifyContent: 'center',
                     }}
                   >
-                    <Typography variant="tiny" weight="bold" style={{ color: colors.brand }}>
+                    <Typography variant="tiny" weight="bold" style={{ color: colors.textMuted }}>
                       {String.fromCharCode(65 + index)}
                     </Typography>
                   </View>
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   content: { paddingHorizontal: 20, paddingTop: 8 },
   input: {
     height: 50,
-    borderWidth: 1.5,
+    borderWidth: 1,
     borderRadius: radius.md,
     paddingHorizontal: 14,
     fontSize: 15,
