@@ -5,7 +5,6 @@ import { Typography } from '../ui/Typography';
 import { ProgressBar } from '../ui/ProgressBar';
 import { darkColors, lightColors } from '../../theme/colors';
 import { radius } from '../../theme/spacing';
-import { Ionicons } from '@expo/vector-icons';
 
 interface OptionResultProps {
   optionId: string;
@@ -18,12 +17,10 @@ interface OptionResultProps {
 }
 
 export function OptionResult({
-  optionId,
   text,
   percentage,
   voteCount,
   isChosen,
-  isWinner,
   delay = 0,
 }: OptionResultProps) {
   const scheme = useColorScheme();
@@ -35,43 +32,53 @@ export function OptionResult({
       animate={{ opacity: 1, translateX: 0 }}
       transition={{ type: 'timing', duration: 350, delay }}
       style={{
-        paddingVertical: 14,
-        paddingHorizontal: 16,
+        flexDirection: 'row',
         borderRadius: radius.lg,
-        borderWidth: 1.5,
-        borderColor: isChosen ? colors.brand : colors.border,
-        backgroundColor: isChosen ? colors.brandDim : colors.surface,
-        gap: 10,
+        overflow: 'hidden',
+        borderWidth: isChosen ? 1.5 : 1,
+        borderColor: isChosen ? colors.accent : colors.border,
+        backgroundColor: colors.surface,
       }}
     >
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-        <Typography
-          variant="body"
-          weight={isChosen ? 'bold' : 'semiBold'}
-          style={{ flex: 1, color: isChosen ? colors.brand : colors.text }}
-        >
-          {text}
-        </Typography>
-        {isChosen && (
-          <Ionicons name="checkmark-circle" size={18} color={colors.brand} />
-        )}
-        <Typography
-          variant="body"
-          weight="bold"
-          style={{ color: isChosen ? colors.brand : colors.text }}
-        >
-          %{percentage}
+      {/* Left accent bar for chosen option */}
+      {isChosen && (
+        <View style={{ width: 3, backgroundColor: colors.accent }} />
+      )}
+      <View
+        style={{
+          flex: 1,
+          paddingVertical: 14,
+          paddingHorizontal: 16,
+          paddingLeft: isChosen ? 14 : 16,
+          gap: 10,
+        }}
+      >
+        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <Typography
+            variant="body"
+            weight={isChosen ? 'bold' : 'semiBold'}
+            style={{ flex: 1, color: colors.text }}
+          >
+            {text}
+          </Typography>
+          <Typography
+            variant="body"
+            weight="extraBold"
+            style={{ color: isChosen ? colors.accent : colors.text }}
+          >
+            %{percentage}
+          </Typography>
+        </View>
+        <ProgressBar
+          percentage={percentage}
+          delay={delay + 150}
+          color={isChosen ? colors.accent : colors.textFaint}
+          height={3}
+        />
+        <Typography variant="tiny" faint>
+          {voteCount.toLocaleString('tr-TR')} oy
         </Typography>
       </View>
-      <ProgressBar
-        percentage={percentage}
-        delay={delay + 150}
-        color={isChosen ? colors.brand : colors.textFaint}
-        height={6}
-      />
-      <Typography variant="tiny" muted>
-        {voteCount.toLocaleString('tr-TR')} oy
-      </Typography>
     </MotiView>
   );
 }

@@ -9,9 +9,16 @@ import {
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { MotiView } from 'moti';
+import { Ionicons } from '@expo/vector-icons';
 import { Typography } from '../../components/ui/Typography';
 import { Button } from '../../components/ui/Button';
 import { darkColors, lightColors } from '../../theme/colors';
+
+const FEATURES = [
+  { icon: 'checkmark-done-outline' as const, text: 'Her gün güncel bir anket' },
+  { icon: 'bar-chart-outline' as const, text: 'Anlık istatistikler ve analizler' },
+  { icon: 'lock-closed-outline' as const, text: 'Tamamen anonim ve şeffaf' },
+];
 
 export default function WelcomeScreen() {
   const scheme = useColorScheme();
@@ -37,8 +44,8 @@ export default function WelcomeScreen() {
     <LinearGradient
       colors={
         scheme === 'dark'
-          ? ['#0D0D0F', '#1A1A2E', '#0D0D0F']
-          : ['#F5F5F0', '#EAE8FF', '#F5F5F0']
+          ? ['#09090B', '#18181B', '#09090B']
+          : ['#FFFFFF', '#FAFAFA', '#FFFFFF']
       }
       style={styles.container}
     >
@@ -56,14 +63,10 @@ export default function WelcomeScreen() {
             <View
               style={[
                 styles.logoCircle,
-                { backgroundColor: colors.brand + '22', borderColor: colors.brand + '44' },
+                { backgroundColor: colors.surfaceAlt, borderColor: colors.border },
               ]}
             >
-              <Typography
-                style={{ fontSize: 48, lineHeight: 60 }}
-              >
-                📊
-              </Typography>
+              <Ionicons name="stats-chart" size={40} color={colors.text} />
             </View>
           </TouchableOpacity>
         </MotiView>
@@ -81,7 +84,7 @@ export default function WelcomeScreen() {
           <Typography
             variant="h3"
             center
-            style={{ color: colors.textMuted, marginTop: 8, lineHeight: 30 }}
+            style={{ color: colors.textMuted, marginTop: 8 }}
           >
             Her gün bir soru.{'\n'}Türkiye ne düşünüyor?
           </Typography>
@@ -94,14 +97,21 @@ export default function WelcomeScreen() {
           transition={{ type: 'timing', duration: 500, delay: 700 }}
           style={styles.features}
         >
-          {[
-            { icon: '🗳️', text: 'Her gün güncel bir anket' },
-            { icon: '📊', text: 'Anlık istatistikler ve analizler' },
-            { icon: '🔒', text: 'Tamamen anonim ve şeffaf' },
-          ].map((f) => (
+          {FEATURES.map((f) => (
             <View key={f.text} style={styles.featureRow}>
-              <Typography style={{ fontSize: 20 }}>{f.icon}</Typography>
-              <Typography variant="body" style={{ color: colors.textMuted }}>
+              <View
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 8,
+                  backgroundColor: colors.surfaceAlt,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Ionicons name={f.icon} size={16} color={colors.text} />
+              </View>
+              <Typography variant="body" style={{ color: colors.textMuted, flex: 1 }}>
                 {f.text}
               </Typography>
             </View>
@@ -142,8 +152,8 @@ const styles = StyleSheet.create({
   logoCircle: {
     width: 96,
     height: 96,
-    borderRadius: 48,
-    borderWidth: 1.5,
+    borderRadius: 24,
+    borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

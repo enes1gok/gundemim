@@ -1,5 +1,5 @@
 import { darkColors, lightColors } from './colors';
-import { fonts, fontSizes, lineHeights } from './typography';
+import { fonts, fontSizes, lineHeights, letterSpacing } from './typography';
 import { spacing, radius } from './spacing';
 
 export const createTheme = (isDark: boolean) => ({
@@ -7,6 +7,7 @@ export const createTheme = (isDark: boolean) => ({
   fonts,
   fontSizes,
   lineHeights,
+  letterSpacing,
   spacing,
   radius,
   isDark,
@@ -14,4 +15,4 @@ export const createTheme = (isDark: boolean) => ({
 
 export type Theme = ReturnType<typeof createTheme>;
 
-export { darkColors, lightColors, fonts, fontSizes, spacing, radius };
+export { darkColors, lightColors, fonts, fontSizes, lineHeights, letterSpacing, spacing, radius };

@@ -14,24 +14,35 @@ export function Tag({ category }: TagProps) {
   const meta = CATEGORIES.find((c) => c.id === category);
   const scheme = useColorScheme();
   const colors = scheme === 'dark' ? darkColors : lightColors;
-  const color = (colors as Record<string, string>)[category] ?? colors.brand;
+  const dotColor = (colors as Record<string, string>)[category] ?? colors.textMuted;
 
   return (
     <View
       style={{
-        backgroundColor: color + '22',
+        backgroundColor: colors.surfaceAlt,
         borderRadius: radius.full,
         paddingHorizontal: 10,
-        paddingVertical: 4,
+        paddingVertical: 5,
         alignSelf: 'flex-start',
         borderWidth: 1,
-        borderColor: color + '44',
+        borderColor: colors.border,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
       }}
     >
+      <View
+        style={{
+          width: 6,
+          height: 6,
+          borderRadius: 3,
+          backgroundColor: dotColor,
+        }}
+      />
       <Typography
         variant="tiny"
-        weight="bold"
-        style={{ color, letterSpacing: 0.8, textTransform: 'uppercase' }}
+        weight="semiBold"
+        style={{ color: colors.text, letterSpacing: 1.2, textTransform: 'uppercase' }}
       >
         {meta?.label ?? category}
       </Typography>

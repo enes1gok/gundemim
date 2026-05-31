@@ -114,7 +114,7 @@ export default function AdminSurveyDetail() {
           </Typography>
         </View>
 
-        <Typography variant="h2" weight="extraBold" style={{ marginBottom: 20, lineHeight: 34 }}>
+        <Typography variant="h2" weight="extraBold" style={{ marginBottom: 20 }}>
           {survey.question}
         </Typography>
 
@@ -129,7 +129,7 @@ export default function AdminSurveyDetail() {
             label="Durum"
             value={survey.status.toUpperCase()}
             colors={colors}
-            accent={colors.brand}
+            accent={colors.accent}
           />
         </View>
 

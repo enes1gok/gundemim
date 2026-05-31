@@ -14,18 +14,19 @@ export default function MainLayout() {
         tabBarStyle: {
           backgroundColor: colors.surface,
           borderTopColor: colors.border,
-          borderTopWidth: 1,
+          borderTopWidth: 0.5,
           elevation: 0,
           shadowOpacity: 0,
-          height: 80,
-          paddingBottom: 20,
+          height: 72,
+          paddingBottom: 16,
         },
-        tabBarActiveTintColor: colors.brand,
-        tabBarInactiveTintColor: colors.textMuted,
+        tabBarActiveTintColor: colors.accent,
+        tabBarInactiveTintColor: colors.textFaint,
         tabBarLabelStyle: {
           fontFamily: 'PlusJakartaSans-SemiBold',
-          fontSize: 11,
+          fontSize: 10,
           marginTop: 2,
+          letterSpacing: 0.3,
         },
       }}
     >
@@ -50,7 +51,7 @@ export default function MainLayout() {
       <Tabs.Screen
         name="results"
         options={{
-          href: null, // Hidden from tab bar, navigated to programmatically
+          href: null,
         }}
       />
     </Tabs>

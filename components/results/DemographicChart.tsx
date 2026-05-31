@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, useColorScheme, ScrollView } from 'react-native';
+import { View, TouchableOpacity, useColorScheme } from 'react-native';
 import { Typography } from '../ui/Typography';
 import { ProgressBar } from '../ui/ProgressBar';
 import { darkColors, lightColors } from '../../theme/colors';
@@ -70,14 +70,13 @@ export function DemographicChart({
         Türkiye Ne Düşündü?
       </Typography>
 
-      {/* Tab bar */}
+      {/* Underline tab bar */}
       <View
         style={{
           flexDirection: 'row',
-          backgroundColor: colors.surfaceAlt,
-          borderRadius: 10,
-          padding: 3,
-          marginBottom: 16,
+          borderBottomWidth: 1,
+          borderBottomColor: colors.border,
+          marginBottom: 20,
         }}
       >
         {TABS.map((tab) => {
@@ -88,16 +87,17 @@ export function DemographicChart({
               onPress={() => setActiveTab(tab.key)}
               style={{
                 flex: 1,
-                paddingVertical: 8,
-                borderRadius: 8,
-                backgroundColor: isActive ? colors.surface : 'transparent',
+                paddingVertical: 10,
                 alignItems: 'center',
+                borderBottomWidth: 2,
+                borderBottomColor: isActive ? colors.accent : 'transparent',
+                marginBottom: -1,
               }}
             >
               <Typography
                 variant="caption"
                 weight={isActive ? 'bold' : 'regular'}
-                style={{ color: isActive ? colors.brand : colors.textMuted }}
+                style={{ color: isActive ? colors.text : colors.textMuted }}
               >
                 {tab.label}
               </Typography>
@@ -113,45 +113,55 @@ export function DemographicChart({
         </Typography>
       ) : (
         <View style={{ gap: 16 }}>
-          {breakdown.map(({ label, bars }, idx) => {
-            const chosenBar = bars.find((b) => b.optionId === chosenOptionId);
-            return (
-              <MotiView
-                key={label}
-                from={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ type: 'timing', duration: 300, delay: baseDelay + idx * 80 }}
+          {breakdown.map(({ label, bars }, idx) => (
+            <MotiView
+              key={label}
+              from={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ type: 'timing', duration: 300, delay: baseDelay + idx * 80 }}
+            >
+              <Typography
+                variant="caption"
+                weight="semiBold"
+                style={{
+                  color: colors.textMuted,
+                  marginBottom: 6,
+                  letterSpacing: 0.8,
+                  textTransform: 'uppercase',
+                }}
               >
-                <Typography variant="caption" weight="semiBold" muted style={{ marginBottom: 6 }}>
-                  {formatDimLabel(activeTab, label)}
-                </Typography>
-                {bars.map((bar) => (
-                  <View key={bar.optionId} style={{ marginBottom: 6 }}>
-                    <View
-                      style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        marginBottom: 3,
-                      }}
+                {formatDimLabel(activeTab, label)}
+              </Typography>
+              {bars.map((bar) => (
+                <View key={bar.optionId} style={{ marginBottom: 6 }}>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                      marginBottom: 4,
+                    }}
+                  >
+                    <Typography
+                      variant="tiny"
+                      numberOfLines={1}
+                      style={{ flex: 1, marginRight: 8 }}
                     >
-                      <Typography variant="tiny" numberOfLines={1} style={{ flex: 1, marginRight: 8 }}>
-                        {bar.label}
-                      </Typography>
-                      <Typography variant="tiny" weight="semiBold">
-                        %{bar.pct}
-                      </Typography>
-                    </View>
-                    <ProgressBar
-                      percentage={bar.pct}
-                      delay={baseDelay + idx * 80 + 100}
-                      color={bar.optionId === chosenOptionId ? colors.brand : colors.textFaint}
-                      height={5}
-                    />
+                      {bar.label}
+                    </Typography>
+                    <Typography variant="tiny" weight="semiBold">
+                      %{bar.pct}
+                    </Typography>
                   </View>
-                ))}
-              </MotiView>
-            );
-          })}
+                  <ProgressBar
+                    percentage={bar.pct}
+                    delay={baseDelay + idx * 80 + 100}
+                    color={bar.optionId === chosenOptionId ? colors.accent : colors.textFaint}
+                    height={3}
+                  />
+                </View>
+              ))}
+            </MotiView>
+          ))}
         </View>
       )}
     </MotiView>

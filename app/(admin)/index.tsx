@@ -29,10 +29,10 @@ const STATUS_LABELS: Record<string, string> = {
 };
 
 const STATUS_COLORS: Record<string, string> = {
-  draft: '#8E8E99',
-  scheduled: '#FF9F0A',
-  active: '#34C759',
-  completed: '#6C63FF',
+  draft: '#71717A',
+  scheduled: '#F59E0B',
+  active: '#22C55E',
+  completed: '#A1A1AA',
 };
 
 function useAdminSurveys() {
@@ -76,9 +76,9 @@ export default function AdminIndexScreen() {
         <View style={{ flexDirection: 'row', gap: 10 }}>
           <TouchableOpacity
             onPress={() => router.push('/(admin)/create')}
-            style={[styles.iconBtn, { backgroundColor: colors.brand }]}
+            style={[styles.iconBtn, { backgroundColor: colors.accent }]}
           >
-            <Ionicons name="add" size={22} color="#fff" />
+            <Ionicons name="add" size={22} color={colors.background} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => { signOut(); router.replace('/(main)'); }}
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   iconBtn: {
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
   },

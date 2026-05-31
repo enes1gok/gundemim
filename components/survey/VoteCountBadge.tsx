@@ -12,14 +12,13 @@ export function VoteCountBadge({ count }: VoteCountBadgeProps) {
   const scheme = useColorScheme();
   const colors = scheme === 'dark' ? darkColors : lightColors;
 
-  const formatted = count >= 1000
-    ? `${(count / 1000).toFixed(1).replace('.0', '')}B`
-    : count.toString();
+  const formatted =
+    count >= 1000 ? `${(count / 1000).toFixed(1).replace('.0', '')}B` : count.toString();
 
   return (
-    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-      <Ionicons name="people-outline" size={14} color={colors.textMuted} />
-      <Typography variant="caption" muted>
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+      <Ionicons name="people-outline" size={12} color={colors.textFaint} />
+      <Typography variant="tiny" faint>
         {formatted} kişi oy kullandı
       </Typography>
     </View>

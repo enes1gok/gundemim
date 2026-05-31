@@ -4,7 +4,6 @@ import {
   TouchableOpacityProps,
   ActivityIndicator,
   useColorScheme,
-  View,
 } from 'react-native';
 import { darkColors, lightColors } from '../../theme/colors';
 import { fonts, fontSizes } from '../../theme/typography';
@@ -30,34 +29,42 @@ export function Button({
   const scheme = useColorScheme();
   const colors = scheme === 'dark' ? darkColors : lightColors;
 
+  // accent-inverted: primary button text is always the opposite of accent
+  const accentTextColor = scheme === 'dark' ? '#000000' : '#FFFFFF';
+
   const bg =
     variant === 'primary'
-      ? colors.brand
+      ? colors.accent
       : variant === 'secondary'
         ? colors.surfaceAlt
         : 'transparent';
 
+  const borderColor =
+    variant === 'ghost' || variant === 'secondary' ? colors.border : 'transparent';
+
   const textColor =
-    variant === 'primary' ? '#FFFFFF' : variant === 'secondary' ? colors.text : colors.brand;
+    variant === 'primary' ? accentTextColor : colors.text;
 
   const isDisabled = disabled || loading;
 
   return (
     <TouchableOpacity
-      activeOpacity={0.8}
+      activeOpacity={0.75}
       disabled={isDisabled}
       style={[
         {
           backgroundColor: bg,
-          borderRadius: radius.full,
+          borderRadius: radius.md,
           paddingVertical: 16,
           paddingHorizontal: 28,
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'row',
-          opacity: isDisabled ? 0.45 : 1,
+          opacity: isDisabled ? 0.35 : 1,
           width: fullWidth ? '100%' : undefined,
-          minHeight: 52,
+          minHeight: 56,
+          borderWidth: variant === 'ghost' || variant === 'secondary' ? 1 : 0,
+          borderColor,
         },
         style,
       ]}
@@ -69,9 +76,10 @@ export function Button({
         <Typography
           style={{
             fontFamily: fonts.bold,
-            fontSize: fontSizes.md,
+            fontSize: fontSizes.base,
             color: textColor,
-            lineHeight: fontSizes.md * 1.2,
+            lineHeight: fontSizes.base * 1.2,
+            letterSpacing: 0.3,
           }}
         >
           {label}

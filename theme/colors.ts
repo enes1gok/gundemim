@@ -1,50 +1,48 @@
 export const darkColors = {
-  background: '#0D0D0F',
-  surface: '#1A1A1F',
-  surfaceAlt: '#242429',
-  surfaceElevated: '#2C2C33',
-  brand: '#6C63FF',
-  brandLight: '#8B85FF',
-  brandDim: '#6C63FF22',
-  text: '#F2F2F7',
-  textMuted: '#8E8E99',
-  textFaint: '#5C5C66',
-  border: '#2C2C35',
-  borderLight: '#3A3A44',
-  success: '#34C759',
-  error: '#FF453A',
-  warning: '#FF9F0A',
+  background: '#09090B',
+  surface: '#18181B',
+  surfaceAlt: '#27272A',
+  surfaceElevated: '#3F3F46',
+  accent: '#FFFFFF',
+  divider: '#18181B',
+  text: '#FAFAFA',
+  textMuted: '#A1A1AA',
+  textFaint: '#71717A',
+  border: '#27272A',
+  borderLight: '#3F3F46',
+  success: '#22C55E',
+  error: '#EF4444',
+  warning: '#F59E0B',
   overlay: 'rgba(0,0,0,0.7)',
 
-  // Category colors
-  siyaset: '#FF6B6B',
-  ekonomi: '#4ECDC4',
-  spor: '#45B7D1',
-  kultur: '#F7DC6F',
+  // Category — muted palette, used only as 6px dot indicators
+  siyaset: '#F87171',
+  ekonomi: '#34D399',
+  spor: '#60A5FA',
+  kultur: '#FBBF24',
 } as const;
 
 export const lightColors = {
-  background: '#F5F5F0',
-  surface: '#FFFFFF',
-  surfaceAlt: '#F0F0EB',
-  surfaceElevated: '#E8E8E4',
-  brand: '#5A52E0',
-  brandLight: '#7B75F0',
-  brandDim: '#5A52E022',
-  text: '#0D0D0F',
-  textMuted: '#6B6B78',
-  textFaint: '#9B9BA6',
-  border: '#E0E0DC',
-  borderLight: '#D0D0CC',
-  success: '#30B04E',
-  error: '#E03030',
-  warning: '#E08A00',
+  background: '#FFFFFF',
+  surface: '#FAFAFA',
+  surfaceAlt: '#F4F4F5',
+  surfaceElevated: '#E4E4E7',
+  accent: '#09090B',
+  divider: '#F4F4F5',
+  text: '#09090B',
+  textMuted: '#71717A',
+  textFaint: '#A1A1AA',
+  border: '#E4E4E7',
+  borderLight: '#D4D4D8',
+  success: '#16A34A',
+  error: '#DC2626',
+  warning: '#D97706',
   overlay: 'rgba(0,0,0,0.4)',
 
-  siyaset: '#E84040',
-  ekonomi: '#2AA89F',
-  spor: '#2090B0',
-  kultur: '#C8A800',
+  siyaset: '#DC2626',
+  ekonomi: '#059669',
+  spor: '#2563EB',
+  kultur: '#D97706',
 } as const;
 
 export type ColorScheme = {
@@ -52,9 +50,8 @@ export type ColorScheme = {
   surface: string;
   surfaceAlt: string;
   surfaceElevated: string;
-  brand: string;
-  brandLight: string;
-  brandDim: string;
+  accent: string;
+  divider: string;
   text: string;
   textMuted: string;
   textFaint: string;

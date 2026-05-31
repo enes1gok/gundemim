@@ -19,15 +19,10 @@ interface OptionGridProps {
 export function OptionGrid({ options, selected, onSelect, columns = 2 }: OptionGridProps) {
   const scheme = useColorScheme();
   const colors = scheme === 'dark' ? darkColors : lightColors;
+  const accentTextColor = scheme === 'dark' ? '#000000' : '#FFFFFF';
 
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: 10,
-      }}
-    >
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}>
       {options.map((opt) => {
         const isSelected = selected === opt.id;
         return (
@@ -41,16 +36,16 @@ export function OptionGrid({ options, selected, onSelect, columns = 2 }: OptionG
               paddingVertical: 13,
               paddingHorizontal: 16,
               borderRadius: radius.md,
-              borderWidth: 1.5,
-              borderColor: isSelected ? colors.brand : colors.border,
-              backgroundColor: isSelected ? colors.brandDim : colors.surface,
+              borderWidth: 1,
+              borderColor: isSelected ? colors.accent : colors.border,
+              backgroundColor: isSelected ? colors.accent : colors.surface,
               alignItems: 'center',
             }}
           >
             <Typography
               variant="body"
               weight={isSelected ? 'semiBold' : 'regular'}
-              style={{ color: isSelected ? colors.brand : colors.text }}
+              style={{ color: isSelected ? accentTextColor : colors.text }}
               center
             >
               {opt.label}
